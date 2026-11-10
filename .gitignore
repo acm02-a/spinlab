@@ -1,0 +1,11 @@
+__pycache__/
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Carpetas de salida de MuMax3 (la tabla util se copia a datos/)
+*.out/
+
+# Datos de referencia de terceros: se descargan a pedido (ver spinlab/fmr.py)
+datos/fmr/referencia_oommf.txt

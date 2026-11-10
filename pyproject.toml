@@ -1,0 +1,26 @@
+[project]
+name = "spinlab"
+version = "0.1.0"
+description = "Simulaciones micromagneticas en GPU validadas contra teoria y literatura"
+requires-python = ">=3.10"
+dependencies = ["numpy", "matplotlib"]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["spinlab"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint.per-file-ignores]
+# matplotlib.use("Agg") debe ir antes de importar pyplot
+"spinlab/*.py" = ["E402"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

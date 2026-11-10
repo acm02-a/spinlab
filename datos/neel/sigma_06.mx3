@@ -1,0 +1,24 @@
+SetGridsize(512, 512, 1)
+SetCellsize(5e-09, 5e-09, 5e-09)
+EnableDemag = false
+Msat  = 800000.0
+Aex   = 0
+Ku1   = 100000.0
+AnisU = vector(0, 0, 1)
+alpha = 0.1
+m = uniform(0, 0, 1)
+
+// Cuatro cuadrantes = cuatro muestras independientes, para la barra de error.
+DefRegion(1, xrange(-inf, 0).intersect(yrange(0, inf)))
+DefRegion(2, xrange(0, inf).intersect(yrange(-inf, 0)))
+DefRegion(3, xrange(0, inf).intersect(yrange(0, inf)))
+TableAdd(m.Region(0))
+TableAdd(m.Region(1))
+TableAdd(m.Region(2))
+TableAdd(m.Region(3))
+
+Temp = 150.895219084165
+ThermSeed(1006)
+FixDt = 2e-13
+tableautosave(1e-11)
+run(1e-08)

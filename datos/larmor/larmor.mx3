@@ -1,0 +1,20 @@
+SetGridsize(1, 1, 1)
+SetCellsize(5e-9, 5e-9, 5e-9)
+
+Msat = 8e5
+Aex  = 1.3e-11
+EnableDemag = false
+alpha = 0
+
+B_ext = vector(0, 0, 0.1)
+m = uniform(1, 0, 0)
+
+// El problema es tan suave que el solver adaptativo da pasos de ~28 ps,
+// mas largos que el intervalo de muestreo. MaxDt lo obliga a pasos cortos.
+MaxDt = 1e-12
+
+tablesave()
+for i := 0; i < 200; i++ {
+	run(5e-12)
+	tablesave()
+}

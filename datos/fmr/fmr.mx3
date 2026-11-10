@@ -1,0 +1,28 @@
+// Parametros tomados de los scripts OOMMF del repositorio de los autores.
+SetGridsize(24, 24, 2)
+SetCellsize(5e-9, 5e-9, 5e-9)
+
+Msat    = 8e5
+Aex     = 1.3e-11
+GammaLL = 2.210173e5 / mu0    // el paper da gamma en m/(A s)
+
+H := 8e4                      // A/m
+
+// Etapa 1: relajacion con el campo a lo largo de (1, 0.715, 0), alpha = 1.
+alpha = 1.0
+m     = uniform(0, 0, 1)
+B_ext = vector(mu0*H*0.81345856316858023, mu0*H*0.58162287266553481, 0)
+run(5e-9)
+
+// Etapa 2: el campo gira a (1, 0.7, 0). Ese cambio brusco es la excitacion.
+t     = 0
+alpha = 0.008
+B_ext = vector(mu0*H*0.81923192051904048, mu0*H*0.57346234436332832, 0)
+
+// tableautosave() no guarda en instantes exactos; la FFT necesita muestreo
+// uniforme, asi que se avanza de a 5 ps y se guarda a mano.
+tablesave()
+for i := 0; i < 4000; i++ {
+	run(5e-12)
+	tablesave()
+}
